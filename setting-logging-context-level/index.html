@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Setting the logging context and level - MkDocs on Github</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">MkDocs on Github</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../How to set up ADP(sa8155) and install webOS Auto/">How to set up ADP</a>
+                            </li>
+                            <li >
+                                <a href="../introduction-to-ls2-api/">Introduction to LS2 API</a>
+                            </li>
+                            <li >
+                                <a href="../localization-guide/">Localization Guide</a>
+                            </li>
+                            <li class="active">
+                                <a href="./">Setting the logging context and level</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../localization-guide/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="disabled">
+                                <a rel="prev" >
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#logging-levels">Logging Levels</a></li>
+        <li class="main "><a href="#retrieving-the-context-information">Retrieving the Context Information</a></li>
+        <li class="main "><a href="#setting-the-logging-level-of-contexts">Setting the Logging Level of Contexts</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>To check or control the system-wide logging context and level, you can use the <strong><code>PmLogCtl</code></strong> command on the target. With this command, you can see the logging level of contexts or limit the log output according to your needs by adjusting the logging level of specific contexts.</p>
+<p>This page explains how to use the <code>PmLogCtl</code> command with examples.</p>
+<h2 id="logging-levels">Logging Levels<a class="headerlink" href="#logging-levels" title="Permanent link">&para;</a></h2>
+<p>The table below shows a list of logging levels that can be set by <code>PmLogCtl</code>. The default level is "info".</p>
+<table>
+<thead>
+<tr>
+<th align="left">Level</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>0</code> or <code>"emerg"</code></td>
+<td>Emergency</td>
+</tr>
+<tr>
+<td align="left"><code>1</code> or <code>"alert"</code></td>
+<td>Alert</td>
+</tr>
+<tr>
+<td align="left"><code>2</code> or <code>"crit"</code></td>
+<td>Critical</td>
+</tr>
+<tr>
+<td align="left"><code>3</code> or <code>"err"</code></td>
+<td>Error</td>
+</tr>
+<tr>
+<td align="left"><code>4</code> or <code>"warning"</code></td>
+<td>Warning</td>
+</tr>
+<tr>
+<td align="left"><code>5</code> or <code>"notice"</code></td>
+<td>Notice</td>
+</tr>
+<tr>
+<td align="left"><code>6</code> or <code>"info"</code></td>
+<td>Info. The default level.</td>
+</tr>
+<tr>
+<td align="left"><code>7</code> or <code>"debug"</code></td>
+<td>Debug</td>
+</tr>
+</tbody>
+</table>
+<h2 id="retrieving-the-context-information">Retrieving the Context Information<a class="headerlink" href="#retrieving-the-context-information" title="Permanent link">&para;</a></h2>
+<p>To get the information of one or more contexts, use <code>PmLogCtl</code> with the <code>show</code> option.</p>
+<p>{{&lt; code "Syntax" true &gt;}}
+<div class="codehilite"><pre><span></span>PmLogCtl show <span class="o">[</span>&lt;context&gt;<span class="o">]</span> <span class="c1"># show logging context(s)</span>
+</pre></div>
+{{&lt; /code &gt;}}</p>
+<p>The <code>&lt;context&gt;</code> can be a specific context name or GLOB.</p>
+<ul>
+<li>
+<p>Without any context specified, information of all available contexts is returned.</p>
+<p>{{&lt; code "Example" true &gt;}}
+<div class="codehilite"><pre><span></span>root@raspberrypi4:/# PmLogCtl show
+PmLogCtl: Context <span class="s1">&#39;&lt;default-lib&gt;&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;&lt;default&gt;&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;ActivityManager&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;aiservice&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;AppInstallD&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;audiooutputd&#39;</span> <span class="o">=</span> info
+...
+PmLogCtl: Context <span class="s1">&#39;wam.log&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;webos-bluetooth-service&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;webos-connman-adapter&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;webos-service&#39;</span> <span class="o">=</span> info
+</pre></div>
+{{&lt; /code &gt;}}</p>
+</li>
+<li>
+<p>With a specific context name or GLOB specified, the information of the corresponding context(s) is returned.</p>
+<p>{{&lt; code "Example" true &gt;}}
+<div class="codehilite"><pre><span></span>root@raspberrypi4:/# PmLogCtl show wam.log
+PmLogCtl: Context <span class="s1">&#39;wam.log&#39;</span> <span class="o">=</span> info
+
+root@raspberrypi4:/# PmLogCtl show webos*
+PmLogCtl: Context <span class="s1">&#39;webos-bluetooth-service&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;webos-connman-adapter&#39;</span> <span class="o">=</span> info
+PmLogCtl: Context <span class="s1">&#39;webos-service&#39;</span> <span class="o">=</span> info
+</pre></div>
+{{&lt; /code &gt;}}</p>
+</li>
+</ul>
+<h2 id="setting-the-logging-level-of-contexts">Setting the Logging Level of Contexts<a class="headerlink" href="#setting-the-logging-level-of-contexts" title="Permanent link">&para;</a></h2>
+<p>To set the logging level of one or more contexts, use <code>PmLogCtl</code> with the <code>set</code> option.</p>
+<p>{{&lt; code "Syntax" true &gt;}}
+<div class="codehilite"><pre><span></span>PmLogCtl <span class="nb">set</span> &lt;context&gt; &lt;level&gt; <span class="c1"># set logging level of context(s)</span>
+</pre></div>
+{{&lt; /code &gt;}}</p>
+<p>The <code>&lt;context&gt;</code> can be a specific context name or GLOB.</p>
+<ul>
+<li>
+<p>Suppose you want to set the logging level of the <code>wam.log</code> context to <code>debug</code>. This will let you see all the messages that have been logged for <code>wam.log</code>.</p>
+<p>{{&lt; code "Example" true &gt;}}
+<div class="codehilite"><pre><span></span>root@raspberrypi4:/# PmLogCtl <span class="nb">set</span> wam.log debug
+PmLogCtl: Setting context level <span class="k">for</span> <span class="s1">&#39;wam.log&#39;</span>.
+
+root@raspberrypi4:/# PmLogCtl show wam.log
+PmLogCtl: Context <span class="s1">&#39;wam.log&#39;</span> <span class="o">=</span> debug
+</pre></div>
+{{&lt; /code &gt;}}</p>
+</li>
+<li>
+<p>On the other hand, if you want to suppress the logging level of uMediaServer(ums)-related contexts to <code>crit</code> (Critical), you can use the following command.</p>
+<p>{{&lt; code "Example" true &gt;}}
+<div class="codehilite"><pre><span></span>root@raspberrypi4:/# PmLogCtl <span class="nb">set</span> ums* crit
+PmLogCtl: Setting context level <span class="k">for</span> <span class="s1">&#39;ums.connector&#39;</span>.
+PmLogCtl: Setting context level <span class="k">for</span> <span class="s1">&#39;ums.media_display_controller&#39;</span>.
+PmLogCtl: Setting context level <span class="k">for</span> <span class="s1">&#39;ums.pipeline_ctrl&#39;</span>.
+PmLogCtl: Setting context level <span class="k">for</span> <span class="s1">&#39;ums.pipeline_mgr&#39;</span>.
+PmLogCtl: Setting context level <span class="k">for</span> <span class="s1">&#39;ums.process_ctrl&#39;</span>.
+PmLogCtl: Setting context level <span class="k">for</span> <span class="s1">&#39;ums.resource_mgr&#39;</span>.
+PmLogCtl: Setting context level <span class="k">for</span> <span class="s1">&#39;ums.server&#39;</span>.
+PmLogCtl: Setting context level <span class="k">for</span> <span class="s1">&#39;ums.videooutput&#39;</span>.
+
+root@raspberrypi4:/# PmLogCtl show ums*
+PmLogCtl: Context <span class="s1">&#39;ums.connector&#39;</span> <span class="o">=</span> crit
+PmLogCtl: Context <span class="s1">&#39;ums.media_display_controller&#39;</span> <span class="o">=</span> crit
+PmLogCtl: Context <span class="s1">&#39;ums.pipeline_ctrl&#39;</span> <span class="o">=</span> crit
+PmLogCtl: Context <span class="s1">&#39;ums.pipeline_mgr&#39;</span> <span class="o">=</span> crit
+PmLogCtl: Context <span class="s1">&#39;ums.process_ctrl&#39;</span> <span class="o">=</span> crit
+PmLogCtl: Context <span class="s1">&#39;ums.resource_mgr&#39;</span> <span class="o">=</span> crit
+PmLogCtl: Context <span class="s1">&#39;ums.server&#39;</span> <span class="o">=</span> crit
+PmLogCtl: Context <span class="s1">&#39;ums.videooutput&#39;</span> <span class="o">=</span> crit
+</pre></div>
+{{&lt; /code &gt;}}</p>
+</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

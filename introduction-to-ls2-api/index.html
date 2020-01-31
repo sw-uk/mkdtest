@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Introduction to LS2 API - MkDocs on Github</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">MkDocs on Github</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../How to set up ADP(sa8155) and install webOS Auto/">How to set up ADP</a>
+                            </li>
+                            <li class="active">
+                                <a href="./">Introduction to LS2 API</a>
+                            </li>
+                            <li >
+                                <a href="../localization-guide/">Localization Guide</a>
+                            </li>
+                            <li >
+                                <a href="../setting-logging-context-level/">Setting the logging context and level</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../How to set up ADP(sa8155) and install webOS Auto/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../localization-guide/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#key-terminology">Key Terminology</a></li>
+            <li><a href="#service-uri">Service URI</a></li>
+            <li><a href="#method">Method</a></li>
+            <li><a href="#parameter">Parameter</a></li>
+            <li><a href="#call-response">Call Response</a></li>
+            <li><a href="#subscription-response">Subscription Response</a></li>
+        <li class="main "><a href="#basics-of-using-ls2-api">Basics of Using LS2 API</a></li>
+            <li><a href="#invoking-a-method">Invoking a Method</a></li>
+            <li><a href="#subscribing-for-notifications">Subscribing for Notifications</a></li>
+        <li class="main "><a href="#whats-next">What's Next</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p><strong>LS2 API</strong> is a JSON-based API provided by webOS platform services. You can use LS2 API to create apps or services that use webOS platform features.</p>
+<p>This page explains the basic concepts of LS2 API using the example of <a href="{{&lt; relref &quot;com-webos-service-systemservice&quot; &gt;}}">com.webos.service.systemservice</a>, which provides access to system settings such as preferences and time/time zone information.</p>
+<h2 id="key-terminology">Key Terminology<a class="headerlink" href="#key-terminology" title="Permanent link">&para;</a></h2>
+<p>The following outlines the key terms and concepts that you will come across while using LS2 API.</p>
+<h3 id="service-uri">Service URI<a class="headerlink" href="#service-uri" title="Permanent link">&para;</a></h3>
+<p>A service URI is a unique address that makes each platform service accessible via <a href="{{&lt; relref &quot;architecture-overview#ls2&quot; &gt;}}">Luna Bus</a>. A service URI follows the format of <code>luna://&lt;service name&gt;</code>.</p>
+<p>Therefore, the clients (other apps or services) can make a request to <code>com.webos.service.systemservice</code> using the address <code>luna://com.webos.service.systemservice</code>.</p>
+<h3 id="method">Method<a class="headerlink" href="#method" title="Permanent link">&para;</a></h3>
+<p>Each service provides one or more methods that are categorized by the feature they provide. Methods common to the service are grouped under the root category, whereas methods related to a specific feature are grouped under the relevant category.</p>
+<p><code>com.webos.service.systemservice</code> provides the following methods to retrieve or set system preference values, which are grouped under the root category.</p>
+<ul>
+<li><code>getPreferences</code></li>
+<li><code>setPreferences</code></li>
+</ul>
+<p>In addition, <code>com.webos.service.systemservice</code> provides time-based methods, which are grouped under the <code>time</code> category. For instance, you can retrieve or set the system time using the following methods:</p>
+<ul>
+<li><code>time/getSystemTime</code></li>
+<li><code>time/setSystemTime</code></li>
+</ul>
+<h3 id="parameter">Parameter<a class="headerlink" href="#parameter" title="Permanent link">&para;</a></h3>
+<p>Parameters are service request options and are passed as a JSON object. Parameters consist of a set of properties required for the service request as well as a few reserved properties that are common to all service requests.</p>
+<p>One example of such reserved properties is the <code>subscribe</code> property, which can be sent to services that allow subscriptions. If the subscription is successful, the service will return subscription responses either at periodic intervals or when its data is updated.</p>
+<p>The following describes the parameters for time-based methods of <code>com.webos.service.systemservice</code>.</p>
+<ul>
+<li><code>time/getSystemTime</code><ul>
+<li>The method does not require any input parameters.</li>
+<li>As an optional parameter, <code>subscribe</code> property can be sent.</li>
+</ul>
+</li>
+<li><code>time/setSystemTime</code><ul>
+<li>The method requires <code>utc</code> (Coordinated Universal Time) as an input parameter.</li>
+<li>As an optional parameter, <code>timestamp</code> object can be sent.</li>
+</ul>
+</li>
+</ul>
+<h3 id="call-response">Call Response<a class="headerlink" href="#call-response" title="Permanent link">&para;</a></h3>
+<p>A call response is a JSON object containing the service's response data to a method call. It has a reserved property <code>returnValue</code> to indicate the success or failure of a call.</p>
+<ul>
+<li>If <code>returnValue</code> is true, the call is a success and the response object might have additional properties depending on the API call being made.<ul>
+<li>If the <code>subscribe</code> property in the parameters was set to true, the response object will return a property <code>subscribed</code> to indicate the success or failure of the subscription. If <code>subscribed</code> is <code>true</code>, it indicates that the subscription was a success.</li>
+</ul>
+</li>
+<li>If <code>returnValue</code> is false, it means the call failed and the response object might contain further properties such as <code>errorCode</code> and <code>errorText</code> that give more information about the error.</li>
+</ul>
+<h3 id="subscription-response">Subscription Response<a class="headerlink" href="#subscription-response" title="Permanent link">&para;</a></h3>
+<p>A subscription response is a JSON object containing the service's response data to a subscription. It has two reserved properties <code>subscribed</code> and <code>returnValue</code>, where <code>subscribed</code> indicates the status of subscription and <code>returnValue</code> indicates the status of operation.</p>
+<h2 id="basics-of-using-ls2-api">Basics of Using LS2 API<a class="headerlink" href="#basics-of-using-ls2-api" title="Permanent link">&para;</a></h2>
+<p>This section explains the basics of how to use LS2 API.</p>
+<h3 id="invoking-a-method">Invoking a Method<a class="headerlink" href="#invoking-a-method" title="Permanent link">&para;</a></h3>
+<p>Clients can make a request to a platform service using methods. In return to the request, the service provides a call response in JSON format.</p>
+<p>The following shows an example of calling the <code>time/getSystemTime</code> method, using the <a href="{{&lt; relref &quot;luna-send&quot; &gt;}}"><code>luna-send</code></a> command. The <code>luna-send</code> command accepts the complete method URI as its argument, which follows the format of <code>&lt;service URI&gt;/&lt;method name&gt;</code>. In case of the <code>time/getSystemTime</code> method, the method URI becomes <code>luna://com.webos.service.systemservice/time/getSystemTime</code>.</p>
+<div class="codehilite"><pre><span></span>$ luna-send -n <span class="m">1</span> -f luna://com.webos.service.systemservice/time/getSystemTime <span class="s1">&#39;{}&#39;</span>
+
+Call response:
+<span class="o">{</span>
+    <span class="s2">&quot;timezone&quot;</span>: <span class="s2">&quot;Asia/Seoul&quot;</span>,
+    <span class="s2">&quot;returnValue&quot;</span>: true,
+    <span class="s2">&quot;utc&quot;</span>: <span class="m">1557280839</span>,
+    <span class="s2">&quot;localtime&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;month&quot;</span>: <span class="m">5</span>,
+        <span class="s2">&quot;day&quot;</span>: <span class="m">8</span>,
+        <span class="s2">&quot;hour&quot;</span>: <span class="m">11</span>,
+        <span class="s2">&quot;minute&quot;</span>: <span class="m">0</span>,
+        <span class="s2">&quot;year&quot;</span>: <span class="m">2019</span>,
+        <span class="s2">&quot;second&quot;</span>: <span class="m">39</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;TZ&quot;</span>: <span class="s2">&quot;KST&quot;</span>,
+    <span class="s2">&quot;systemTimeSource&quot;</span>: <span class="s2">&quot;ntp&quot;</span>,
+    <span class="s2">&quot;timestamp&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;source&quot;</span>: <span class="s2">&quot;monotonic&quot;</span>,
+        <span class="s2">&quot;sec&quot;</span>: <span class="m">730</span>,
+        <span class="s2">&quot;nsec&quot;</span>: <span class="m">472935963</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;timeZoneFile&quot;</span>: <span class="s2">&quot;/var/luna/preferences/localtime&quot;</span>,
+    <span class="s2">&quot;offset&quot;</span>: <span class="m">540</span>,
+    <span class="s2">&quot;isDST&quot;</span>: <span class="nb">false</span>
+<span class="o">}</span>
+</pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>Empty curly braces (<code>'{}'</code>) after the method URI indicate that no parameters are passed to the method.</li>
+</ul>
+</div>
+<h3 id="subscribing-for-notifications">Subscribing for Notifications<a class="headerlink" href="#subscribing-for-notifications" title="Permanent link">&para;</a></h3>
+<p>Clients can subscribe for notifications of some methods. In this case, the client makes a subscription request for the method and gets notified when any updates are available. This works well for operations where the information is likely to change and where the client needs the latest information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In most cases, subscription is only supported on methods that accept the <code>subscribe</code> parameter. However, some methods are subscription-only, meaning that they are automatically subscribed and do not have the <code>subscribe</code> parameter.</p>
+</div>
+<p>The following shows an example of subscribing to the <code>time/getSystemTime</code> method, using the <code>luna-send</code> command. To test subscription with the <code>luna-send</code> command, use <code>-i</code> option for interactive mode.</p>
+<div class="codehilite"><pre><span></span>$ luna-send -i -f luna://com.webos.service.systemservice/time/getSystemTime <span class="s1">&#39;{&quot;subscribe&quot;: true}&#39;</span>
+
+Call response:
+<span class="o">{</span>
+    <span class="s2">&quot;timezone&quot;</span>: <span class="s2">&quot;Asia/Seoul&quot;</span>,
+    <span class="s2">&quot;returnValue&quot;</span>: true,
+    <span class="s2">&quot;utc&quot;</span>: <span class="m">1561617075</span>,
+    <span class="s2">&quot;localtime&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;month&quot;</span>: <span class="m">6</span>,
+        <span class="s2">&quot;day&quot;</span>: <span class="m">27</span>,
+        <span class="s2">&quot;hour&quot;</span>: <span class="m">15</span>,
+        <span class="s2">&quot;minute&quot;</span>: <span class="m">31</span>,
+        <span class="s2">&quot;year&quot;</span>: <span class="m">2019</span>,
+        <span class="s2">&quot;second&quot;</span>: <span class="m">15</span>
+    <span class="o">}</span>,
+<span class="hll">    <span class="s2">&quot;subscribed&quot;</span>: true,
+</span>    <span class="s2">&quot;TZ&quot;</span>: <span class="s2">&quot;KST&quot;</span>,
+    <span class="s2">&quot;systemTimeSource&quot;</span>: <span class="s2">&quot;ntp&quot;</span>,
+    ...
+<span class="o">}</span>
+</pre></div>
+
+<p>By setting the <code>subscribe</code> parameter to <code>true</code>, the client subscribes to the <code>time/getSystemTime</code> method in order to get notifications in the following situations:</p>
+<ul>
+<li>When the system time changes by more than the system-defined threshold (5 minutes)</li>
+<li>When the time zone changes</li>
+</ul>
+<p>If you make one of the above changes in the Settings app, subscription responses will be received as follows:</p>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">System time changed</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span>Subscription response:
+<span class="o">{</span>
+    <span class="s2">&quot;timezone&quot;</span>: <span class="s2">&quot;Asia/Seoul&quot;</span>,
+    <span class="s2">&quot;NITZValidZone&quot;</span>: false,
+    <span class="s2">&quot;utc&quot;</span>: <span class="m">1561614000</span>,
+    <span class="s2">&quot;localtime&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;month&quot;</span>: <span class="m">6</span>,
+        <span class="s2">&quot;day&quot;</span>: <span class="m">27</span>,
+<span class="hll">        <span class="s2">&quot;hour&quot;</span>: <span class="m">14</span>,
+</span><span class="hll">        <span class="s2">&quot;minute&quot;</span>: <span class="m">40</span>,
+</span><span class="hll">        <span class="s2">&quot;year&quot;</span>: <span class="m">2019</span>,
+</span>        <span class="s2">&quot;second&quot;</span>: <span class="m">0</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;TZ&quot;</span>: <span class="s2">&quot;KST&quot;</span>,
+    <span class="s2">&quot;systemTimeSource&quot;</span>: <span class="s2">&quot;manual&quot;</span>,
+    ...
+<span class="o">}</span>
+</pre></div></div>
+</div>
+<p>Time zone changed</p>
+<div class="codehilite"><pre><span></span>Subscription response:
+<span class="o">{</span>
+<span class="hll">    <span class="s2">&quot;timezone&quot;</span>: <span class="s2">&quot;Asia/Dubai&quot;</span>,
+</span>    <span class="s2">&quot;NITZValidZone&quot;</span>: false,
+    <span class="s2">&quot;utc&quot;</span>: <span class="m">1561617502</span>,
+    <span class="s2">&quot;localtime&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;month&quot;</span>: <span class="m">6</span>,
+        <span class="s2">&quot;day&quot;</span>: <span class="m">27</span>,
+        <span class="s2">&quot;hour&quot;</span>: <span class="m">10</span>,
+        <span class="s2">&quot;minute&quot;</span>: <span class="m">38</span>,
+        <span class="s2">&quot;year&quot;</span>: <span class="m">2019</span>,
+        <span class="s2">&quot;second&quot;</span>: <span class="m">22</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;TZ&quot;</span>: <span class="s2">&quot;+04&quot;</span>,
+    <span class="s2">&quot;systemTimeSource&quot;</span>: <span class="s2">&quot;ntp&quot;</span>,
+    ...
+<span class="o">}</span>
+</pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To exit the interactive mode of <code>luna-send</code>, input <strong>Ctrl+C</strong>.</p>
+</div>
+<h2 id="whats-next">What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li>To find out how to use LS2 API in your apps or services, see the following pages:</li>
+<li><a href="{{&lt; relref &quot;using-ls2-api-in-web-apps&quot; &gt;}}">Using LS2 API in Web Apps</a></li>
+<li>To view the details of LS2 API, refer to <a href="{{&lt; relref &quot;ls2-api-index&quot; &gt;}}">LS2 API reference</a>.</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

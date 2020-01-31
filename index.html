@@ -13,6 +13,7 @@
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/extra.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -32,11 +33,33 @@
 
                 <!-- Collapsed navigation -->
                 <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href=".">MkDocs on Github</a>
                 </div>
 
                 <!-- Expanded navigation -->
                 <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="How to set up ADP(sa8155) and install webOS Auto/">How to set up ADP</a>
+                            </li>
+                            <li >
+                                <a href="introduction-to-ls2-api/">Introduction to LS2 API</a>
+                            </li>
+                            <li >
+                                <a href="localization-guide/">Localization Guide</a>
+                            </li>
+                            <li >
+                                <a href="setting-logging-context-level/">Setting the logging context and level</a>
+                            </li>
+                        </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -52,28 +75,92 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#welcome-to-mkdocs">Welcome to MkDocs</a></li>
-            <li><a href="#commands">Commands</a></li>
-            <li><a href="#project-layout">Project layout</a></li>
+        <li class="main active"><a href="#mkdocs-poc-demo">MkDocs PoC Demo</a></li>
+            <li><a href="#code-block">Code Block의 표시</a></li>
+            <li><a href="#code-block_1">Code Block 라인 번호 표시</a></li>
+            <li><a href="#list-code-block">List 하위에 Code Block 표시</a></li>
+            <li><a href="#note-code-block">Note 내부에 Code Block 표시</a></li>
+            <li><a href="#code-block-highlight">Code Block의 특정 라인 highlight</a></li>
+            <li><a href="#code-block-title">Code Block title 표시 불가 (대안)</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs help</code> - Print this help message.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre></div>
+<h2 id="mkdocs-poc-demo">MkDocs PoC Demo<a class="headerlink" href="#mkdocs-poc-demo" title="Permanent link">&para;</a></h2>
+<h3 id="code-block">Code Block의 표시<a class="headerlink" href="#code-block" title="Permanent link">&para;</a></h3>
+<h4 id="fenced-code-block">Fenced Code Block<a class="headerlink" href="#fenced-code-block" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>#!/usr/bin
+$ echo &quot;Hello World!&quot;
+</pre></div>
+
+<h4 id="backtick-code-block">Backtick Code Block<a class="headerlink" href="#backtick-code-block" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>#!/usr/bin
+$ echo &quot;Hello World!&quot;
+</pre></div>
+
+<h4 id="indented-code-block">Indented Code Block<a class="headerlink" href="#indented-code-block" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>#!/usr/bin
+$ echo &quot;Hello World!&quot;
+</pre></div>
+
+
+<h3 id="code-block_1">Code Block 라인 번호 표시<a class="headerlink" href="#code-block_1" title="Permanent link">&para;</a></h3>
+<h4 id="line-number">Line Number 특정 코드 블럭에만 사용<a class="headerlink" href="#line-number" title="Permanent link">&para;</a></h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>#!/usr/bin
+$ echo &quot;Hello World!&quot;
+</pre></div>
+</td></tr></table>
+
+<h3 id="list-code-block">List 하위에 Code Block 표시<a class="headerlink" href="#list-code-block" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>First item of the list</p>
+<div class="codehilite"><pre><span></span>#!/usr/bin
+$ echo &quot;Hello World!&quot;
+</pre></div>
+
+
+</li>
+<li>
+<p>Second item of the list</p>
+<div class="codehilite"><pre><span></span>&lt;html&gt;
+&lt;head&gt;
+&lt;script src=&quot; &quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;/html&gt;
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="note-code-block">Note 내부에 Code Block 표시<a class="headerlink" href="#note-code-block" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">code block inside note</p>
+<blockquote>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>$ echo &quot;test&quot; &gt; text.txt
+$ exit
+</pre></div>
+</td></tr></table>
+
+</blockquote>
+</div>
+<h3 id="code-block-highlight">Code Block의 특정 라인 highlight<a class="headerlink" href="#code-block-highlight" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="ch">#!/usr/bin</span>
+</span>$ <span class="nb">echo</span> <span class="s2">&quot;Hello World!&quot;</span>
+<span class="hll">$ touch example.txt
+</span></pre></div>
+
+<h3 id="code-block-title">Code Block title 표시 불가 (대안)<a class="headerlink" href="#code-block-title" title="Permanent link">&para;</a></h3>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">Tab Title</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin</span>
+$ <span class="nb">echo</span> <span class="s2">&quot;Hello World!&quot;</span>
+$ touch example.txt
+</pre></div></div>
+</div></div>
         </div>
 
         <footer class="col-md-12">
@@ -156,5 +243,5 @@ docs/
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2020-01-23 08:47:39
+Build Date UTC : 2020-01-31 06:47:29
 -->
