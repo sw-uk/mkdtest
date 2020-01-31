@@ -1,1 +1,18 @@
 site_name: MkDocs on Github
+theme: mkdocs
+nav:
+    - 'How to set up ADP': 'How to set up ADP(sa8155) and install webOS Auto.md'
+    - 'Introduction to LS2 API': 'introduction-to-ls2-api.md'
+    - 'Localization Guide': 'localization-guide.md'
+    - 'Setting the logging context and level': 'setting-logging-context-level.md'
+markdown_extensions:
+    - admonition
+    - codehilite:
+        guess_lang: None
+        linenums: False
+    - fenced_code
+    - toc:
+        permalink: True
+    - pymdownx.superfences
+extra_css:
+    - css/extra.css
