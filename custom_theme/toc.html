@@ -1,0 +1,12 @@
+<div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    {%- for toc_item in page.toc %}
+        <li class="main {% if toc_item.active %}active{% endif %} {% if toc_item.children %}dropdown-btn{% endif %}"><a href="{{ toc_item.url }}">{{ toc_item.title }}{% if toc_item.children %}<span class="fa fa-angle-down"></span>{% endif %}</a></li>
+        {% if toc_item.children %}<div class="dropdown-container">{% endif %}
+        {%- for toc_item in toc_item.children %}
+            <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+        {%- endfor %}
+        {% if toc_item.children %}</div>{% endif %}
+    {%- endfor %}
+    </ul>
+</div>

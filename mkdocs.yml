@@ -15,3 +15,8 @@ markdown_extensions:
     - pymdownx.superfences
 extra_css:
     - css/extra.css
+extra_javascript:
+    - js/extra.js
+theme:
+    name: "mkdocs"
+    custom_dir: 'custom_theme/'
