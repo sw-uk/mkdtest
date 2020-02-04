@@ -82,17 +82,27 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#localization-tool">Localization Tool</a></li>
+        <li class="main active dropdown-btn"><a href="#localization-tool">Localization Tool<span class="fa fa-angle-down"></span></a></li>
+        <div class="dropdown-container">
             <li><a href="#xliff">XLIFF</a></li>
             <li><a href="#writing-the-recipe-to-use-the-localization-tool">Writing the Recipe to Use the Localization Tool</a></li>
-        <li class="main "><a href="#javascript">JavaScript</a></li>
+        </div>
+        <li class="main  dropdown-btn"><a href="#javascript">JavaScript<span class="fa fa-angle-down"></span></a></li>
+        <div class="dropdown-container">
             <li><a href="#enact-apps">Enact Apps</a></li>
             <li><a href="#non-enact-apps">Non-Enact Apps</a></li>
             <li><a href="#resource-format">Resource Format</a></li>
             <li><a href="#preventing-the-use-of-duplicate-data">Preventing the Use of Duplicate Data</a></li>
-        <li class="main "><a href="#cc">C++/C</a></li>
-        <li class="main "><a href="#qtqml">Qt/QML</a></li>
-        <li class="main "><a href="#pseudo-localization">Pseudo-Localization</a></li>
+        </div>
+        <li class="main  "><a href="#cc">C++/C</a></li>
+        
+        
+        <li class="main  "><a href="#qtqml">Qt/QML</a></li>
+        
+        
+        <li class="main  "><a href="#pseudo-localization">Pseudo-Localization</a></li>
+        
+        
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -438,6 +448,7 @@ inherit webos_localizable
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
+        <script src="../js/extra.js" defer></script>
         <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

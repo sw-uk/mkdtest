@@ -1,3 +1,13 @@
 .hll {
 	background-color: lightgreen;
 }
+
+.dropdown-container {
+	display: none;
+	padding: 5px 20px;
+}
+
+.fa-angle-down {
+	float: right;
+	padding-right: 8px;
+}

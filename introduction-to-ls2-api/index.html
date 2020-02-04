@@ -82,16 +82,22 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#key-terminology">Key Terminology</a></li>
+        <li class="main active dropdown-btn"><a href="#key-terminology">Key Terminology<span class="fa fa-angle-down"></span></a></li>
+        <div class="dropdown-container">
             <li><a href="#service-uri">Service URI</a></li>
             <li><a href="#method">Method</a></li>
             <li><a href="#parameter">Parameter</a></li>
             <li><a href="#call-response">Call Response</a></li>
             <li><a href="#subscription-response">Subscription Response</a></li>
-        <li class="main "><a href="#basics-of-using-ls2-api">Basics of Using LS2 API</a></li>
+        </div>
+        <li class="main  dropdown-btn"><a href="#basics-of-using-ls2-api">Basics of Using LS2 API<span class="fa fa-angle-down"></span></a></li>
+        <div class="dropdown-container">
             <li><a href="#invoking-a-method">Invoking a Method</a></li>
             <li><a href="#subscribing-for-notifications">Subscribing for Notifications</a></li>
-        <li class="main "><a href="#whats-next">What's Next</a></li>
+        </div>
+        <li class="main  "><a href="#whats-next">What's Next</a></li>
+        
+        
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -279,6 +285,7 @@ Call response:
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
+        <script src="../js/extra.js" defer></script>
         <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

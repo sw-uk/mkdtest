@@ -72,13 +72,15 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#mkdocs-poc-demo">MkDocs PoC Demo</a></li>
+        <li class="main active dropdown-btn"><a href="#mkdocs-poc-demo">MkDocs PoC Demo<span class="fa fa-angle-down"></span></a></li>
+        <div class="dropdown-container">
             <li><a href="#code-block">Code Block의 표시</a></li>
             <li><a href="#code-block_1">Code Block 라인 번호 표시</a></li>
             <li><a href="#list-code-block">List 하위에 Code Block 표시</a></li>
             <li><a href="#note-code-block">Note 내부에 Code Block 표시</a></li>
             <li><a href="#code-block-highlight">Code Block의 특정 라인 highlight</a></li>
             <li><a href="#code-block-title">Code Block title 표시 불가 (대안)</a></li>
+        </div>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -169,6 +171,7 @@ $ touch example.txt
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="js/base.js" defer></script>
+        <script src="js/extra.js" defer></script>
         <script src="search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
@@ -240,5 +243,5 @@ $ touch example.txt
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2020-02-03 01:56:10
+Build Date UTC : 2020-02-04 06:44:18
 -->
