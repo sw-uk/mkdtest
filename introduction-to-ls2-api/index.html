@@ -47,14 +47,30 @@
                 <div class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="active">
-                                <a href="./">Introduction to LS2 API</a>
-                            </li>
                             <li >
-                                <a href="../localization-guide/">Localization Guide</a>
+                                <a href="..">Home</a>
                             </li>
-                            <li >
-                                <a href="../setting-logging-context-level/">Setting the logging context and level</a>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Guide <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li class="active">
+    <a href="./">Introduction to LS2 API</a>
+</li>
+                                    
+<li >
+    <a href="../localization-guide/">Localization Guide</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Development <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../setting-logging-context-level/">Setting the logging context and level</a>
+</li>
+                                </ul>
                             </li>
                         </ul>
 
@@ -64,8 +80,8 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="disabled">
-                                <a rel="next" >
+                            <li >
+                                <a rel="next" href="..">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
@@ -80,26 +96,42 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+                <div class="col-md-3">
+<div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active dropdown-btn"><a href="#key-terminology">Key Terminology<span class="fa fa-angle-down"></span></a></li>
-        <div class="dropdown-container">
-            <li><a href="#service-uri">Service URI</a></li>
-            <li><a href="#method">Method</a></li>
-            <li><a href="#parameter">Parameter</a></li>
-            <li><a href="#call-response">Call Response</a></li>
-            <li><a href="#subscription-response">Subscription Response</a></li>
-        </div>
-        <li class="main  dropdown-btn"><a href="#basics-of-using-ls2-api">Basics of Using LS2 API<span class="fa fa-angle-down"></span></a></li>
-        <div class="dropdown-container">
-            <li><a href="#invoking-a-method">Invoking a Method</a></li>
-            <li><a href="#subscribing-for-notifications">Subscribing for Notifications</a></li>
-        </div>
-        <li class="main  "><a href="#whats-next">What's Next</a></li>
+    
         
+            <li class="main ">
+                <a href=".." style="padding: 5px 0px">
+                    Home</a>
+            </li>
         
+    
+        
+            <li class="main">Guide</li>
+            
+                <li  class="main active">
+                    <a href="./">Introduction to LS2 API</a>
+                </li>
+            
+                <li  class="main ">
+                    <a href="../localization-guide/">Localization Guide</a>
+                </li>
+            
+        
+    
+        
+            <li class="main">Development</li>
+            
+                <li  class="main ">
+                    <a href="../setting-logging-context-level/">Setting the logging context and level</a>
+                </li>
+            
+        
+    
     </ul>
-</div></div>
+</div>
+</div>
                 <div class="col-md-9" role="main">
 
 <p><strong>LS2 API</strong> is a JSON-based API provided by webOS platform services. You can use LS2 API to create apps or services that use webOS platform features.</p>

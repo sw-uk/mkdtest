@@ -48,13 +48,29 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li >
-                                <a href="../introduction-to-ls2-api/">Introduction to LS2 API</a>
+                                <a href="..">Home</a>
                             </li>
-                            <li >
-                                <a href="../localization-guide/">Localization Guide</a>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Guide <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../introduction-to-ls2-api/">Introduction to LS2 API</a>
+</li>
+                                    
+<li >
+    <a href="../localization-guide/">Localization Guide</a>
+</li>
+                                </ul>
                             </li>
-                            <li class="active">
-                                <a href="./">Setting the logging context and level</a>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Development <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li class="active">
+    <a href="./">Setting the logging context and level</a>
+</li>
+                                </ul>
                             </li>
                         </ul>
 
@@ -80,19 +96,42 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+                <div class="col-md-3">
+<div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active "><a href="#logging-levels">Logging Levels</a></li>
+    
         
+            <li class="main ">
+                <a href=".." style="padding: 5px 0px">
+                    Home</a>
+            </li>
         
-        <li class="main  "><a href="#retrieving-the-context-information">Retrieving the Context Information</a></li>
+    
         
+            <li class="main">Guide</li>
+            
+                <li  class="main ">
+                    <a href="../introduction-to-ls2-api/">Introduction to LS2 API</a>
+                </li>
+            
+                <li  class="main ">
+                    <a href="../localization-guide/">Localization Guide</a>
+                </li>
+            
         
-        <li class="main  "><a href="#setting-the-logging-level-of-contexts">Setting the Logging Level of Contexts</a></li>
+    
         
+            <li class="main">Development</li>
+            
+                <li  class="main active">
+                    <a href="./">Setting the logging context and level</a>
+                </li>
+            
         
+    
     </ul>
-</div></div>
+</div>
+</div>
                 <div class="col-md-9" role="main">
 
 <p>To check or control the system-wide logging context and level, you can use the <strong><code>PmLogCtl</code></strong> command on the target. With this command, you can see the logging level of contexts or limit the log output according to your needs by adjusting the logging level of specific contexts.</p>
