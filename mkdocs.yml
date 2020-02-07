@@ -1,9 +1,12 @@
 site_name: MkDocs on Github
 theme: mkdocs
 nav:
-    - 'Introduction to LS2 API': 'introduction-to-ls2-api.md'
-    - 'Localization Guide': 'localization-guide.md'
-    - 'Setting the logging context and level': 'setting-logging-context-level.md'
+    - Home: 'index.md'
+    - Guide:
+        - 'Introduction to LS2 API': 'introduction-to-ls2-api.md'
+        - 'Localization Guide': 'localization-guide.md'
+    - Development:
+        - 'Setting the logging context and level': 'setting-logging-context-level.md'
 markdown_extensions:
     - admonition
     - codehilite:
